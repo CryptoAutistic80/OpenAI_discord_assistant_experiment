@@ -1,0 +1,8 @@
+[2023-11-13 17:54:01,457] ERROR: Failed to load cog: cogs.assistant. Error: Extension 'cogs.assistant' raised an error: OpenAIError: The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
+[2023-11-13 17:54:04,704] INFO: Logged in as SHELIUS!
+[2023-11-13 17:55:20,627] ERROR: Failed to load cog: cogs.assistant. Error: Extension 'cogs.assistant' raised an error: NameError: name 'openai' is not defined
+[2023-11-13 17:55:23,785] INFO: Logged in as SHELIUS!
+[2023-11-13 17:56:29,360] ERROR: Failed to load cog: cogs.assistant. Error: Extension 'cogs.assistant' raised an error: NameError: name 'openai' is not defined
+[2023-11-13 17:56:32,545] INFO: Logged in as SHELIUS!
+[2023-11-13 17:57:09,378] INFO: Loaded cog: cogs.assistant
+[2023-11-13 17:57:12,506] INFO: Logged in as SHELIUS!

@@ -1,4 +1,4 @@
-#Made by Autism
+# Made by Autism
 
 import asyncio
 import logging
@@ -28,9 +28,9 @@ class HeliusChatBot(commands.Cog):
         self.bot = bot
         self.api_semaphore = asyncio.Semaphore(50)
         self.user_threads = {}  # Stores thread IDs for each user
-        self.helius_assistant_id = "asst_Ha98jCNa9rIRvw8L7dFXUZyh"  # Your HELIUS assistant ID
+        self.helius_assistant_id = os.getenv('HELIUS_ASSISTANT_ID')  # Load the HELIUS assistant ID from Replit secrets
         self.last_bot_message_id = None  # Track the last message ID sent by the bot
-        self.allowed_channel_ids = [1112510368879743146]  # Allowed channel ID
+        self.allowed_channel_ids = [1112510368879743146]  # Allowed channel IDs
 
     @commands.Cog.listener()
     async def on_ready(self):
@@ -41,7 +41,6 @@ class HeliusChatBot(commands.Cog):
         if message.author.bot or message.channel.id not in self.allowed_channel_ids:
             return
 
-        # Check if the message is a mention of the bot or a reply to the bot's last message
         is_mention = self.bot.user in message.mentions
         is_reply = message.reference and message.reference.message_id == self.last_bot_message_id
 
@@ -53,30 +52,27 @@ class HeliusChatBot(commands.Cog):
             async with message.channel.typing():
                 async with self.api_semaphore:
                     try:
-                        # Adding the user's message to the thread
                         client.beta.threads.messages.create(
                             thread_id=self.user_threads[user_id],
                             role="user",
                             content=message.content
                         )
 
-                        # Make the assistant process the conversation and generate a response
                         run = client.beta.threads.runs.create(
                             thread_id=self.user_threads[user_id],
                             assistant_id=self.helius_assistant_id
                         )
 
-                        # Wait for the run to complete
                         run = wait_on_run(run, self.user_threads[user_id])
 
-                        # Fetching the latest messages in the thread including the assistant's response
                         messages = client.beta.threads.messages.list(thread_id=self.user_threads[user_id]).data
+                        latest_assistant_message = next((msg for msg in reversed(messages) if msg.role == "assistant"), None)
 
-                        # Displaying the assistant's response
-                        for msg in messages:
-                            if msg.role == "assistant":
-                                bot_message = await message.channel.send(f"HELIUS: {msg.content}")
-                                self.last_bot_message_id = bot_message.id
+                        if latest_assistant_message:
+                            response_texts = [content_part.get('text', {}).get('value', '') for content_part in latest_assistant_message.content if 'text' in content_part]
+                            response_text = ' '.join(response_texts)
+                            bot_message = await message.channel.send(response_text)
+                            self.last_bot_message_id = bot_message.id
 
                     except Exception as e:
                         logger.error(f"Error while generating response: {str(e)}")

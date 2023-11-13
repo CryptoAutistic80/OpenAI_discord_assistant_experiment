@@ -14,6 +14,9 @@ client = OpenAI()
 # Load the OpenAI API key from Replit secrets
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
+# Load Assistant ID
+ASSISTANT_ID = os.getenv('ASSISTANT_ID')
+
 def wait_on_run(run, thread_id):
     while run.status == "queued" or run.status == "in_progress":
         run = client.beta.threads.runs.retrieve(
@@ -28,7 +31,7 @@ class HeliusChatBot(commands.Cog):
         self.bot = bot
         self.api_semaphore = asyncio.Semaphore(50)
         self.user_threads = {}  # Stores thread IDs for each user
-        self.helius_assistant_id = os.getenv('HELIUS_ASSISTANT_ID')  # Load the HELIUS assistant ID from Replit secrets
+        self.helius_assistant_id = ASSISTANT_ID        
         self.last_bot_message_id = None  # Track the last message ID sent by the bot
         self.allowed_channel_ids = [1112510368879743146]  # Allowed channel IDs
 
@@ -66,10 +69,16 @@ class HeliusChatBot(commands.Cog):
                         run = wait_on_run(run, self.user_threads[user_id])
 
                         messages = client.beta.threads.messages.list(thread_id=self.user_threads[user_id]).data
-                        latest_assistant_message = next((msg for msg in reversed(messages) if msg.role == "assistant"), None)
+                        latest_assistant_message = next((msg for msg in messages if msg.role == "assistant"), None)
 
                         if latest_assistant_message:
-                            response_texts = [content_part.get('text', {}).get('value', '') for content_part in latest_assistant_message.content if 'text' in content_part]
+                            response_texts = []
+                            for content_item in latest_assistant_message.content:
+                                # Debugging: Print attributes of the content item
+                                # print(dir(content_item))
+                                # Assuming 'text' attribute has a 'value' attribute
+                                if hasattr(content_item, 'text') and hasattr(content_item.text, 'value'):
+                                    response_texts.append(content_item.text.value)
                             response_text = ' '.join(response_texts)
                             bot_message = await message.channel.send(response_text)
                             self.last_bot_message_id = bot_message.id

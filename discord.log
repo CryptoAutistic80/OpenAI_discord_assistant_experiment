@@ -9,3 +9,18 @@
 [2023-11-13 18:37:10,915] INFO: Loaded cog: cogs.assistant
 [2023-11-13 18:37:14,991] INFO: Logged in as SHELIUS!
 [2023-11-13 18:37:32,088] ERROR: Error while generating response: 'list' object has no attribute 'text'
+[2023-11-13 19:15:53,998] INFO: Loaded cog: cogs.assistant
+[2023-11-13 19:15:57,249] INFO: Logged in as SHELIUS!
+[2023-11-13 19:16:04,209] ERROR: Error while generating response: Error code: 404 - {'error': {'message': "No assistant found with id 'default-assistant-id'.", 'type': 'invalid_request_error', 'param': None, 'code': None}}
+[2023-11-13 19:23:57,130] INFO: Loaded cog: cogs.assistant
+[2023-11-13 19:24:00,445] INFO: Logged in as SHELIUS!
+[2023-11-13 19:24:17,156] ERROR: Error while generating response: Error code: 404 - {'error': {'message': "No assistant found with id 'default-assistant-id'.", 'type': 'invalid_request_error', 'param': None, 'code': None}}
+[2023-11-13 19:26:37,221] INFO: Loaded cog: cogs.assistant
+[2023-11-13 19:26:40,553] INFO: Logged in as SHELIUS!
+[2023-11-13 19:27:01,722] ERROR: Error while generating response: 'MessageContentText' object is not subscriptable
+[2023-11-13 19:31:37,706] INFO: Loaded cog: cogs.assistant
+[2023-11-13 19:31:41,026] INFO: Logged in as SHELIUS!
+[2023-11-13 19:38:00,085] INFO: Loaded cog: cogs.assistant
+[2023-11-13 19:38:03,408] INFO: Logged in as SHELIUS!
+[2023-11-13 19:47:07,330] INFO: Loaded cog: cogs.assistant
+[2023-11-13 19:47:10,594] INFO: Logged in as SHELIUS!

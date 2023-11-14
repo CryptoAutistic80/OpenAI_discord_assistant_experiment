@@ -25,6 +25,7 @@ import os
 import nextcord
 from nextcord.ext import commands
 
+from database.user_database import create_table
 from server import keep_alive
 
 
@@ -72,6 +73,10 @@ bot = commands.Bot(command_prefix="!", intents=intents, help_command=None)
 @bot.event
 async def on_ready():
   logger.info(f'Logged in as {bot.user.name}!')
+
+  # Initialize the database
+  await create_table()
+  logger.info('Database initialized.')
 
 # Load cogs
 load_cogs(bot, logger)

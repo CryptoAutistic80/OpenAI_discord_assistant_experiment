@@ -24,3 +24,12 @@
 [2023-11-13 19:38:03,408] INFO: Logged in as SHELIUS!
 [2023-11-13 19:47:07,330] INFO: Loaded cog: cogs.assistant
 [2023-11-13 19:47:10,594] INFO: Logged in as SHELIUS!
+[2023-11-13 20:06:33,229] INFO: Loaded cog: cogs.assistant
+[2023-11-13 20:06:37,458] INFO: Logged in as HELIUS 3.0!
+[2023-11-14 10:07:00,637] INFO: Loaded cog: cogs.assistant
+[2023-11-14 10:07:03,963] INFO: Logged in as HELIUS 3.0!
+[2023-11-14 10:10:10,723] ERROR: Error while generating response: 400 Bad Request (error code: 50035): Invalid Form Body
+In content: Must be 2000 or fewer in length.
+[2023-11-14 12:14:02,032] INFO: Loaded cog: cogs.assistant
+[2023-11-14 12:14:05,439] INFO: Logged in as HELIUS 3.0!
+[2023-11-14 12:14:05,463] INFO: Database initialized.
